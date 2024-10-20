@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekomendasi Drama Korea</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FFE4E1; 
+        }
+
+        h2 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            background-color: #ffffff; 
+        }
+
+        .table th {
+            background-color: #FF69B4; 
+            color: white;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #FFEBEF; 
+        }
+
+        .table tbody tr:hover {
+            background-color: #FFB6C1; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2>List Drama Korea</h2>
+        <div class="table-container">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Judul Drama</th>
+                        <th>Tahun</th>
+                        <th>Genre</th>
+                        <th>Publisher</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const dummyData = [
+            { no: 1, judul: 'My Love from the Star', tahun: 2013, genre: 'Romantis, Fantasi', produksi: 'SBS' },
+            { no: 2, judul: 'Descendants of the Sun', tahun: 2016, genre: 'Romantis, Aksi', produksi: 'KBS2' },
+            { no: 3, judul: 'Crash Landing on You', tahun: 2019, genre: 'Romantis, Komedi', produksi: 'tvN' },
+            { no: 4, judul: 'Goblin', tahun: 2016, genre: 'Fantasi, Romantis', produksi: 'tvN' },
+            { no: 5, judul: 'Itaewon Class', tahun: 2020, genre: 'Drama, Komedi', produksi: 'JTBC' },
+            { no: 6, judul: 'Vincenzo', tahun: 2021, genre: 'Drama, Komedi', produksi: 'tvN' },
+            { no: 7, judul: 'The Penthouse', tahun: 2020, genre: 'Drama, Thriller', produksi: 'SBS' },
+            { no: 8, judul: 'Sky Castle', tahun: 2018, genre: 'Drama, Komedi', produksi: 'JTBC' },
+            { no: 9, judul: 'Mr. Sunshine', tahun: 2018, genre: 'Drama, Sejarah', produksi: 'tvN' },
+            { no: 10, judul: 'The King: Eternal Monarch', tahun: 2020, genre: 'Fantasi, Romantis', produksi: 'SBS' },
+            { no: 11, judul: 'Signal', tahun: 2016, genre: 'Kriminal, Fantasi', produksi: 'tvN' },
+            { no: 12, judul: 'Hotel Del Luna', tahun: 2019, genre: 'Fantasi, Romantis', produksi: 'tvN' },
+            { no: 13, judul: 'Strong Woman Do Bong Soon', tahun: 2017, genre: 'Romantis, Komedi', produksi: 'JTBC' },
+            { no: 14, judul: 'Weightlifting Fairy Kim Bok Joo', tahun: 2016, genre: 'Romantis, Komedi', produksi: 'MBC' },
+            { no: 15, judul: 'Healer', tahun: 2014, genre: 'Aksi, Romantis', produksi: 'KBS2' },
+            { no: 16, judul: 'W: Two Worlds', tahun: 2016, genre: 'Fantasi, Romantis', produksi: 'MBC' },
+            { no: 17, judul: 'While You Were Sleeping', tahun: 2017, genre: 'Fantasi, Romantis', produksi: 'SBS' },
+            { no: 18, judul: 'Doctor Romantic', tahun: 2016, genre: 'Medis, Drama', produksi: 'SBS' },
+            { no: 19, judul: 'The Heirs', tahun: 2013, genre: 'Romantis, Komedi', produksi: 'SBS' },
+            { no: 20, judul: 'It’s Okay to Not Be Okay', tahun: 2020, genre: 'Romantis, Drama', produksi: 'tvN' },
+            { no: 21, judul: 'Memories of the Alhambra', tahun: 2018, genre: 'Fantasi, Romantis', produksi: 'tvN' },
+            { no: 22, judul: 'The Legend of the Blue Sea', tahun: 2016, genre: 'Fantasi, Romantis', produksi: 'SBS' },
+            { no: 23, judul: 'What’s Wrong with Secretary Kim?', tahun: 2018, genre: 'Romantis, Komedi', produksi: 'tvN' },
+            { no: 24, judul: 'Extraordinary You', tahun: 2019, genre: 'Romantis, Fantasi', produksi: 'MBC' },
+            { no: 25, judul: 'Hometown Cha-Cha-Cha', tahun: 2021, genre: 'Romantis, Komedi', produksi: 'tvN' },
+            { no: 26, judul: 'The World of the Married', tahun: 2020, genre: 'Melodrama', produksi: 'JTBC' },
+            { no: 27, judul: 'Flower of Evil', tahun: 2020, genre: 'Thriller, Romantis', produksi: 'tvN' },
+            { no: 28, judul: 'Cheese in the Trap', tahun: 2016, genre: 'Romantis, Drama', produksi: 'tvN' },
+            { no: 29, judul: 'Kill Me, Heal Me', tahun: 2015, genre: 'Romantis, Medis', produksi: 'MBC' },
+            { no: 30, judul: 'Reply 1988', tahun: 2015, genre: 'Drama, Komedi', produksi: 'tvN' },
+            { no: 31, judul: 'My ID is Gangnam Beauty', tahun: 2018, genre: 'Romantis, Drama', produksi: 'JTBC' },
+            { no: 32, judul: 'Youth of May', tahun: 2021, genre: 'Romantis, Drama', produksi: 'KBS2' },
+            { no: 33, judul: 'The Red Sleeve', tahun: 2021, genre: 'Sejarah, Romantis', produksi: 'MBC' },
+            { no: 34, judul: 'Business Proposal', tahun: 2022, genre: 'Romantis, Komedi', produksi: 'SBS' },
+            { no: 35, judul: 'Doom at Your Service', tahun: 2021, genre: 'Fantasi, Romantis', produksi: 'tvN' },
+            { no: 36, judul: 'Twenty-Five Twenty-One', tahun: 2022, genre: 'Romantis, Drama', produksi: 'tvN' },
+            { no: 37, judul: 'Bad and Crazy', tahun: 2021, genre: 'Aksi, Thriller', produksi: 'tvN' },
+            { no: 38, judul: 'Mouse', tahun: 2021, genre: 'Thriller, Misteri', produksi: 'tvN' },
+            { no: 39, judul: 'The Uncanny Counter', tahun: 2020, genre: 'Fantasi, Aksi', produksi: 'OCN' },
+            { no: 40, judul: 'Secret Garden', tahun: 2010, genre: 'Fantasi, Romantis', produksi: 'SBS' },
+            { no: 41, judul: 'Prison Playbook', tahun: 2017, genre: 'Drama, Komedi', produksi: 'tvN' },
+            { no: 42, judul: 'The Good Detective', tahun: 2020, genre: 'Kriminal, Misteri', produksi: 'JTBC' },
+            { no: 43, judul: 'My Mister', tahun: 2018, genre: 'Drama', produksi: 'tvN' },
+            { no: 44, judul: 'Kairos', tahun: 2020, genre: 'Thriller, Fantasi', produksi: 'MBC' },
+            { no: 45, judul: 'Lawless Lawyer', tahun: 2018, genre: 'Aksi, Hukum', produksi: 'tvN' },
+            { no: 46, judul: 'Her Private Life', tahun: 2019, genre: 'Romantis, Komedi', produksi: 'tvN' },
+            { no: 47, judul: 'Fight for My Way', tahun: 2017, genre: 'Romantis, Komedi', produksi: 'KBS2' },
+            { no: 48, judul: 'The Beauty Inside', tahun: 2018, genre: 'Fantasi, Romantis', produksi: 'JTBC' },
+            { no: 49, judul: 'Oh My Ghost', tahun: 2015, genre: 'Fantasi, Romantis', produksi: 'tvN' },
+            { no: 50, judul: 'Bring It On, Ghost', tahun: 2016, genre: 'Fantasi, Romantis', produksi: 'tvN' }
+        ];
+
+        const tableBody = document.getElementById('tableBody');
+
+        dummyData.forEach(data => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${data.no}</td>
+                <td>${data.judul}</td>
+                <td>${data.tahun}</td>
+                <td>${data.genre}</td>
+                <td>${data.produksi}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
